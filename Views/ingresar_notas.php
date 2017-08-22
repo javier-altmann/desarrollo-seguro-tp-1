@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingresar Notas</title>
+
+    <link rel="stylesheet" href="../css/grid.css">
+   
+    
+</head>
+
+<header>
+     <? include 'menu_profesores.php'; ?>
+</header>
+<body>
+  
+   <section style="text-align: center; margin-top:50px;">
+  
+
+
+      
+    </section>
+    
+   
+</body>
+</html>
+ 

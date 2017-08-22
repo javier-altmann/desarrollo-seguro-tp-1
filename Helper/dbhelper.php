@@ -26,6 +26,24 @@ class DBHelper {
        
         self::$con->exec($sql);
 	}
+    
+     public static function crearAsignatura($nombre, $apellido)
+	{
+		self::connect();
+     
+		$sql = "INSERT INTO asignatura (id_profesor,id_alumno,'nombre_asignatura') VALUES ('$id_profesor','$id_alumno','$nombre_asignatura')";
+        
+       
+        self::$con->exec($sql);
+	}
+    
+    public static function listarProfesores(){
+        self::conect();
+        $sql = "SELECT nombre from profesor";
+         self::$con->query($sql);
+      
+        
+    }
 }
 
 ?>

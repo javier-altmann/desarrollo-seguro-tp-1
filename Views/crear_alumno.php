@@ -28,7 +28,7 @@
 
     <input type="submit" name="crear_alumno" value="Crear alumno" style="margin-top:7px";>
     
-   <? var_dump($_POST) ?>
+
       
     </section>
      </form>

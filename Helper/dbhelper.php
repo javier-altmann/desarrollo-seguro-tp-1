@@ -27,11 +27,11 @@ class DBHelper {
         self::$con->exec($sql);
 	}
     
-     public static function crearAsignatura($nombre, $apellido)
+     public static function crearAsignatura($id_profesor, $nombre_asignatura)
 	{
 		self::connect();
      
-		$sql = "INSERT INTO asignatura (id_profesor,id_alumno,'nombre_asignatura') VALUES ('$id_profesor','$id_alumno','$nombre_asignatura')";
+		$sql = "INSERT INTO asignatura (id_profesor,'nombre_asignatura') VALUES ('$id_profesor','$nombre_asignatura')";
         
        
         self::$con->exec($sql);

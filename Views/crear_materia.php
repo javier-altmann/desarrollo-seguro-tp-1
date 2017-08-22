@@ -13,16 +13,25 @@
      <? include 'menu_secreteria.php'; ?>
 </header>
 <body>
-   <form action="crear_asignatura.php" method="POST">
+   <form action="crear_materia.php" method="POST">
    <section style="text-align: center; margin-top:50px;">
   
     <div class="col-8">
         <label>Profesor</label>
-         <select>
-          <option value="volvo">pru</option>
-          
+         <select name="profesor">
+          <?
+           require_once 'conexion.php';
+             $sql = "SELECT nombre,id_profesor from profesor";
+            $resultado = $con->query($sql);
+             ?>
+         <? foreach($resultado as $row){ ?>
+          <option value="<? echo $row['id_profesor']; ?>"><? echo $row['nombre']; ?></option>
+          <?}?>
+        
         </select>
-       
+ 
+  
+   
     </div>
 
     <div class="col-8" style="margin-top:20px;">
@@ -38,16 +47,14 @@
    
 </body>
 </html>
-  <?php 
-           require_once '../Helper/dbhelper.php';
-            $listado = DBHelper::listarProfesores();
+<?php
+if (isset($_POST['materia'])) 
+{
+    $nombre_asignatura = $_POST['materia']; 
+    $id_profesor = $_POST['profesor'];
+    $sql = "INSERT INTO asignatura (id_asignatura, id_profesor, nombre_asignatura) VALUES (NULL, '$id_profesor', '$nombre_asignatura')";
+    $con->exec($sql);
+}
+?>
           
-
-            foreach ($listado as $value)
-            {
-                var_dump($value);
-            }
-            
-         
        
-          ?>

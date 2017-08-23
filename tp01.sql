@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-08-2017 a las 17:19:02
+-- Tiempo de generación: 23-08-2017 a las 15:06:38
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -55,7 +55,37 @@ CREATE TABLE IF NOT EXISTS `asignatura` (
   PRIMARY KEY (`id_asignatura`),
   UNIQUE KEY `id_asignatura` (`id_asignatura`),
   KEY `id_profesor` (`id_profesor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+
+--
+-- Volcado de datos para la tabla `asignatura`
+--
+
+INSERT INTO `asignatura` (`id_asignatura`, `id_profesor`, `nombre_asignatura`) VALUES
+(45, 4, 'redes');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cursada`
+--
+
+CREATE TABLE IF NOT EXISTS `cursada` (
+  `id_cursada` int(11) NOT NULL AUTO_INCREMENT,
+  `id_asignatura` int(11) DEFAULT NULL,
+  `id_alumno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_cursada`),
+  UNIQUE KEY `id_cursada` (`id_cursada`),
+  KEY `id_asignatura` (`id_asignatura`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Volcado de datos para la tabla `cursada`
+--
+
+INSERT INTO `cursada` (`id_cursada`, `id_asignatura`, `id_alumno`) VALUES
+(8, 45, 2),
+(9, 45, 2);
 
 -- --------------------------------------------------------
 
@@ -101,14 +131,15 @@ CREATE TABLE IF NOT EXISTS `profesor` (
   PRIMARY KEY (`id_profesor`),
   UNIQUE KEY `id_profesor` (`id_profesor`),
   KEY `id_permisos` (`id_permisos`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `profesor`
 --
 
 INSERT INTO `profesor` (`id_profesor`, `nombre`, `dni`, `id_permisos`) VALUES
-(1, 'Juan', '32712332', NULL);
+(1, 'Juan', '32712332', NULL),
+(4, 'pedro', '3987102', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,6 +182,12 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 ALTER TABLE `asignatura`
   ADD CONSTRAINT `asignatura_ibfk_1` FOREIGN KEY (`id_profesor`) REFERENCES `profesor` (`id_profesor`);
+
+--
+-- Filtros para la tabla `cursada`
+--
+ALTER TABLE `cursada`
+  ADD CONSTRAINT `cursada_ibfk_1` FOREIGN KEY (`id_asignatura`) REFERENCES `asignatura` (`id_asignatura`);
 
 --
 -- Filtros para la tabla `notas_alumno`

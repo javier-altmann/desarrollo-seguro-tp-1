@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-08-2017 a las 15:06:38
+-- Tiempo de generación: 24-08-2017 a las 16:11:47
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -30,17 +30,19 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `id_alumno` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) DEFAULT NULL,
   `apellido` varchar(250) DEFAULT NULL,
+  `id_cursada` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_alumno`),
-  UNIQUE KEY `id_alumno` (`id_alumno`)
+  UNIQUE KEY `id_alumno` (`id_alumno`),
+  KEY `id_cursada` (`id_cursada`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `alumno`
 --
 
-INSERT INTO `alumno` (`id_alumno`, `nombre`, `apellido`) VALUES
-(1, 'Javier', 'Altmann'),
-(2, 'Carlos', 'Prueba');
+INSERT INTO `alumno` (`id_alumno`, `nombre`, `apellido`, `id_cursada`) VALUES
+(1, 'Javier', 'Altmann', NULL),
+(2, 'Carlos', 'Prueba', NULL);
 
 -- --------------------------------------------------------
 
@@ -55,14 +57,16 @@ CREATE TABLE IF NOT EXISTS `asignatura` (
   PRIMARY KEY (`id_asignatura`),
   UNIQUE KEY `id_asignatura` (`id_asignatura`),
   KEY `id_profesor` (`id_profesor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 --
 -- Volcado de datos para la tabla `asignatura`
 --
 
 INSERT INTO `asignatura` (`id_asignatura`, `id_profesor`, `nombre_asignatura`) VALUES
-(45, 4, 'redes');
+(45, 4, 'redes'),
+(46, 4, 'Programacion'),
+(47, 1, 'Administración');
 
 -- --------------------------------------------------------
 
@@ -77,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `cursada` (
   PRIMARY KEY (`id_cursada`),
   UNIQUE KEY `id_cursada` (`id_cursada`),
   KEY `id_asignatura` (`id_asignatura`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `cursada`
@@ -85,7 +89,9 @@ CREATE TABLE IF NOT EXISTS `cursada` (
 
 INSERT INTO `cursada` (`id_cursada`, `id_asignatura`, `id_alumno`) VALUES
 (8, 45, 2),
-(9, 45, 2);
+(9, 45, 1),
+(10, 46, 1),
+(11, 47, 2);
 
 -- --------------------------------------------------------
 
@@ -176,6 +182,12 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`id_cursada`) REFERENCES `cursada` (`id_cursada`);
 
 --
 -- Filtros para la tabla `asignatura`

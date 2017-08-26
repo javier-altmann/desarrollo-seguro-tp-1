@@ -61,10 +61,11 @@
 </html>
 <?php
 
+    if(isset($_POST['inscribir_alumno'])){
     $id_asignatura = $_POST['materia']; 
     $id_alumno= $_POST['alumno'];
     $sql = "INSERT INTO cursada (id_cursada, id_asignatura, id_alumno) VALUES (NULL, '$id_asignatura', '$id_alumno')";
     $con->exec($sql);
-
+}
 ?>
           

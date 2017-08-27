@@ -10,7 +10,7 @@
 </head>
 
 <header>
-     <? include 'menu_secreteria.php'; ?>
+     <?php include 'menu_secreteria.php'; ?>
 </header>
 <body>
    <form action="crear_alumno.php" method="POST">
@@ -36,7 +36,7 @@
 </body>
 </html>
   <?php 
-           require_once '../Helper/dbhelper.php';
+           require_once '../helper/dbhelper.php';
            if (isset($_POST["crear_alumno"])) {
               DBHelper::crearAlumno($_POST['nombre'], $_POST['apellido']);
            }

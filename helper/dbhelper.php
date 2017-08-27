@@ -1,4 +1,4 @@
-<?
+<?php
 class DBHelper {
 	
 	private static $con;

@@ -9,7 +9,7 @@
 </head>
 
 <header>
-    <? include 'menu_profesores.php'; ?>
+    <?php include 'menu_secreteria.php'; ?>
 </header>
 <body>
 

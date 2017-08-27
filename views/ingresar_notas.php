@@ -11,13 +11,13 @@
 </head>
 
 <header>
-    <? include 'menu_profesores.php'; ?>
+    <?php include 'menu_profesores.php'; ?>
 </header>
 <body>
     <div class="col-8" style="margin-top:20px;">
         <label>Materia</label>
          <select name="materia">
-          <?
+          <?php
            require_once 'conexion.php';
              $sql = "select profesor.id_profesor, asignatura.nombre_asignatura, asignatura.id_asignatura
                     from  profesor
@@ -25,9 +25,9 @@
                     ON profesor.id_profesor = asignatura.id_profesor;";
             $resultado = $con->query($sql);
              ?>
-         <? foreach($resultado as $row){ ?>
-          <option value="<? echo $row['id_asignatura']; ?>"><? echo $row['nombre_asignatura']; ?></option>
-          <?}?>
+         <?php foreach($resultado as $row){ ?>
+          <option value="<?php echo $row['id_asignatura']; ?>"><?php echo $row['nombre_asignatura']; ?></option>
+          <?php}?>
         
         </select>
             <input type="submit" name="listado_alumnos" value="Lista de alumnos" style="margin-top:7px";>
@@ -51,7 +51,7 @@
 </body>
 </html>
 
-<?
+<?php
     //HACER SELECT PARA FILTRAR LOS ALUMNOS POR MATERIA
 
 ?>

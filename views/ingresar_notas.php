@@ -19,15 +19,17 @@
          <select name="materia">
           <?php
            require_once 'conexion.php';
-             $sql = "select profesor.id_profesor, asignatura.nombre_asignatura, asignatura.id_asignatura
-                    from  profesor
+             $sql = "select usuario.id_usuario, asignatura.nombre_asignatura, asignatura.id_asignatura
+                    from  usuario 
                     INNER JOIN asignatura
-                    ON profesor.id_profesor = asignatura.id_profesor;";
+                    ON usuario.id_usuario = asignatura.id_usuario
+                    where usuario.rol = 'profesor'";
             $resultado = $con->query($sql);
              ?>
-         <?php foreach($resultado as $row){ ?>
-          <option value="<?php echo $row['id_asignatura']; ?>"><?php echo $row['nombre_asignatura']; ?></option>
-          <?php}?>
+        
+        <?php foreach ($resultado as $row) { ?>
+                    <option value="<?php echo $row['id_asignatura']; ?>"><?php echo $row['nombre_asignatura']; ?></option>
+                <?php } ?>
         
         </select>
             <input type="submit" name="listado_alumnos" value="Lista de alumnos" style="margin-top:7px";>
@@ -50,8 +52,3 @@
     </div>
 </body>
 </html>
-
-<?php
-    //HACER SELECT PARA FILTRAR LOS ALUMNOS POR MATERIA
-
-?>

@@ -10,7 +10,7 @@
 </head>
 
 <header>
-    <?php include 'menu_secreteria.php'; ?>
+    <?php include 'menu_secretaria.php'; ?>
 </header>
 <body>
 <form action="inscribir_alumno.php" method="POST">

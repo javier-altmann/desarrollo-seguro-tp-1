@@ -12,27 +12,31 @@
 <?php
 
 session_start();
-    
+
 try {
- 	$conexion = new PDO('mysql:host=localhost;dbname=tp01', 'root' , '');
- } catch (Exception $e) {
- 	echo "ERROR A LA CONECCION DE LA BASE DE DATOS";
- } 
-  
-    
+    $conexion = new PDO('mysql:host=localhost;dbname=tp01', 'root', '');
+} catch (Exception $e) {
+    echo "ERROR A LA CONECCION DE LA BASE DE DATOS";
+}
+
+
 if (isset($_POST["submit"])) {
-    $query = "SELECT * FROM usuario WHERE usuario = '".$_POST['usuario']  . "' AND contrasenia = '" .  $_POST['password'] . "'"; 
+    $query = "SELECT rol FROM usuario WHERE usuario = '" . $_POST['usuario'] . "' AND contrasenia = '" . $_POST['password'] . "'";
     $sql = $conexion->prepare($query);
     $sql->execute();
-    
-   $resultado = $sql->fetchAll();    
-  
-    
-   
-    if ($resultado) {
-        $_SESSION['logged_in'] = true;
-        header('Location: ./ingresar_notas.php');
+
+    $resultado = $sql->fetchAll();
+    foreach ($resultado as $row) {
+        echo $row["rol"];
+        if ($row["rol"] == "profesor") {
+            $_SESSION['logged_in'] = true;
+            header('Location: ./ingresar_notas.php');
+        } else if ($row["rol"] == "secretaria") {
+            $_SESSION['logged_in'] = true;
+            header('Location: ./menu_secretaria.php');
+        }
     }
+
 }
 ?>
 

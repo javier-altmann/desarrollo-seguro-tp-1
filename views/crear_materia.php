@@ -11,7 +11,7 @@
 
 <header>
     <?php
-    include 'menu_secreteria.php';
+    include 'menu_secretaria.php';
     ?>
 </header>
 <body>

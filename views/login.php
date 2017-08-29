@@ -11,23 +11,27 @@
 
 <?php
 
-
-require_once 'conexion.php';
 session_start();
-
-
+    
+try {
+ 	$conexion = new PDO('mysql:host=localhost;dbname=tp01', 'root' , '');
+ } catch (Exception $e) {
+ 	echo "ERROR A LA CONECCION DE LA BASE DE DATOS";
+ } 
+  
+    
 if (isset($_POST["submit"])) {
-    $usuario = $_POST["user"];
-    $password = $_POST["pass"];
-
-    $sql = "SELECT * from usuario WHERE usuario='" . $usuario . "' and contraseña='" . $password . "';";
-    echo $sql;
-    $resultado = $con->query($sql);
-
-    $resultado = $resultado->fetch();
+    $query = "SELECT * FROM usuario WHERE usuario = '".$_POST['usuario']  . "' AND contrasenia = '" .  $_POST['password'] . "'"; 
+    $sql = $conexion->prepare($query);
+    $sql->execute();
+    
+   $resultado = $sql->fetchAll();    
+  
+    
+   
     if ($resultado) {
         $_SESSION['logged_in'] = true;
-        header('Location: /views/menu_profesores.php');
+        header('Location: ./ingresar_notas.php');
     }
 }
 ?>
@@ -37,12 +41,12 @@ if (isset($_POST["submit"])) {
     <form method="POST">
         <div class="col-8">
             <label>Usuario</label>
-            <input type="text" name="user" placeholder="username"/>
+            <input type="text" name="usuario" placeholder="username"/>
         </div>
 
         <div class="col-8">
             <label>Contraseña</label>
-            <input type="password" name="pass" placeholder="password"/>
+            <input type="password" name="password" placeholder="password"/>
         </div>
 
         <input type="submit" name="submit">
@@ -50,3 +54,15 @@ if (isset($_POST["submit"])) {
 </section>
 </body>
 </html>
+
+
+
+
+
+
+
+ 
+
+
+
+

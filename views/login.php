@@ -11,18 +11,25 @@
 
 <?php
 
+
 require_once 'conexion.php';
-
 session_start();
-//change 'valid_username' and 'valid_password' to your desired "correct" username and password
-if (!empty($_POST) && $_POST['user'] === 'emanuel' && $_POST['pass'] === 'paz')
-{
-    $_SESSION['logged_in'] = true;
 
-    header('Location: /views/menu_profesores.php');
+
+if (isset($_POST["submit"])) {
+    $usuario = $_POST["user"];
+    $password = $_POST["pass"];
+
+    $sql = "SELECT * from usuario WHERE usuario='" . $usuario . "' and contraseña='" . $password . "';";
+    echo $sql;
+    $resultado = $con->query($sql);
+
+    $resultado = $resultado->fetch();
+    if ($resultado) {
+        $_SESSION['logged_in'] = true;
+        header('Location: /views/menu_profesores.php');
+    }
 }
-else
-{
 ?>
 
 <section class="row" style="align-content: center">
@@ -40,9 +47,6 @@ else
 
         <input type="submit" name="submit">
     </form>
-    <?php
-    }
-    ?>
 </section>
 </body>
 </html>
